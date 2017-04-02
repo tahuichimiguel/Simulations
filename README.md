@@ -10,5 +10,5 @@
 - **Language:** Java
 
 #### Simulation of Unsteady Heat Generation in a Disposable Battery
-- Simulation of transient heating of a battery subject to electric heating and external convection.
+-  Simulation of transient conduction heat transfer in a cylindrical body composed of a ￼heterogeneous material subject to both volumetric heat generation and convection heat transfer
 - **Language:** Java
