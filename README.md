@@ -6,9 +6,9 @@
 - **Language** Python
 
 #### Radiative Heating in Absorptive and Scattering Media
-- Codes that simulate radiative heating by plane-parallel slabs at 500K and 1000K.
+- Simulation of radiative heating by plane-parallel slabs at 500K and 1000K.
 - **Language:** Java
 
 #### Simulation of Unsteady Heat Generation in a Disposable Battery
-- Codes that simulate transient heating of a battery subject to electric heating and external convection.
+- Simulation of transient heating of a battery subject to electric heating and external convection.
 - **Language:** Java
