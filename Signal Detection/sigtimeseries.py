@@ -115,6 +115,15 @@ def delta_noise_norm(series,window=30,advance=30, alpha=0.00001):
 
     return out
     
+def spans(series,start_indxs,end_indxs,base_dist=50, span_dist=50):
+    out=[]
+    
+    for i in range(len(start_indxs)):
+         baseline=np.mean(series[start_indxs[i]-base_dist:start_indxs[i]])
+         span=np.mean(series[end_indxs[i]-span_dist:end_indxs[i]])
+         out.append(span-baseline)
+     
+    return out
     
     
 #### CODE TESTING
