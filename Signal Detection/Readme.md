@@ -4,6 +4,6 @@
   - Evaluation of algorithm performances will be determined via Monte-Carlo simulations with noise sampled from:
     + Normal Distribution
     + Uniform Distribution
-    + Chi-Squared Distibution
-    + Exponential Distribution
+    + Laplace Distibution
+    
     
