@@ -1,5 +1,4 @@
 import numpy as np
-import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 # Detect Locations of Sudden Changes in Signal
@@ -28,11 +27,11 @@ def delta_slope(series,tail_dist=10,lead_dist=10, advance = 50,threshold=1.1 ,ba
     return out
     
     
-def delta_outlier(series, window=30, advance = 50, Z=3,back=1):
+def delta_outlier(series, window=50, advance = 100, Z=6,back=1):
     """
-    Identify locations of sudden change accounting for Gaussian Noise 
+    Identify locations of sudden change accounting for Gaussian Noise Distribution 
     Moderate Sensitivity
-    Very Robust to Noise
+    Robust to Noise
     """
     
     if advance<window:
@@ -54,7 +53,7 @@ def delta_outlier(series, window=30, advance = 50, Z=3,back=1):
         i+=1        
     return out
 
-# Calculate Rates of Sudden Change
+# Calculate Time to Reach Specified Fraction of Final Value
 def delta_rate(series,start_indxs,end_indxs,base_dist=50, span_dist=50,threshold=0.9):
     """
     Counts the number of samples it takes for the change in signal to reach
@@ -84,11 +83,9 @@ def delta_rate(series,start_indxs,end_indxs,base_dist=50, span_dist=50,threshold
     return out
     
 # Detect Sudden Change is Signal Noise (Assumming Gaussian Noise)
-def delta_noise_norm(series,window=30,advance=30, alpha=0.00001):
+def delta_noise_norm(series,window=30,advance=30, F_crit=3):
     out = []
-    
-    F_crit=stats.f.ppf((1-.5*alpha), window, window, loc=0, scale=1)
-    
+        
     indx=1
     ref_var=np.var(series[0:window])
     last_test=0
@@ -126,39 +123,3 @@ def spans(series,start_indxs,end_indxs,base_dist=50, span_dist=50):
     return out
     
     
-#### CODE TESTING
-    
-### Signal Change Detection
-
-testA = np.zeros(300)
-testA = np.append(testA,np.ones(300)*400)
-testA = np.append(testA,np.zeros(300))
-testA = np.append(testA,np.ones(300)*400)
-testA = np.append(testA,np.zeros(300))
-testA = np.append(testA,np.ones(300)*400)
-testA = np.append(testA,np.zeros(300))
-testA = np.append(testA,np.ones(300)*400)
-testA = np.append(testA,np.zeros(300))
-testA = np.append(testA,np.ones(300)*400)
-
-noise = np.random.rand(len(testA))*100 - 50
-noisy_testA =testA+noise
-plt.plot(noisy_testA)
-
-a=delta_outlier(noisy_testA,window=30, advance = 30, Z=3,back=1)
-if len(a)%2!=0 :
-    a.append(len(noisy_testA))
-start = a[0::2]
-end=a[1::2]
-
-#T90=delta_rate(noisy_testA,start,end)
-#print(delta_slope(testA,tail_dist=2,lead_dist=2, advance = 10,threshold=1.2 ,back=1))
-#print(delta_outlier(test,advance=30,Z=3))
-
-### Noise Modulation Detection
-testB = np.random.randn(300)*10
-testB=np.append(testB,np.random.randn(300))
-plt.plot(testB)
-
-a=delta_noise_norm(testB)
-print(a)
