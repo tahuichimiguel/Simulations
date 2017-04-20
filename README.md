@@ -16,3 +16,5 @@
 # Custom Signal Detection Algorithms 
 
 #### Signal Detection
+- Custom module for signal detection of time series data
+- **Language:** Python
